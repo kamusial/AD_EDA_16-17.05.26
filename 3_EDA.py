@@ -50,7 +50,7 @@ print("\n" + "="*50)
 print("STATYSTYKI KATEGORYCZNE")
 print("="*50)
 
-kolumny_tekstowe = df.select_dtypes(include='object').columns
+kolumny_tekstowe = df.select_dtypes(include='str').columns
 if len (kolumny_tekstowe) > 0:
     for kolumna in kolumny_tekstowe:
         print(f'\nKolumna: {kolumna}')
@@ -73,9 +73,6 @@ if brakujace.sum() > 0:
             braki_liczbowo = df[kolumna].isnull().sum()
             braki_procentowo = braki_liczbowo / len(df) * 100
             print(f'    {kolumna}: {braki_liczbowo} ({braki_procentowo:.1f})%')
-
-
-
 
 # 8. Wizualizacje
 print("\n" + "=" * 50)
@@ -141,3 +138,29 @@ if len(kolumny_numeryczne) >= 2 and False:
     plt.tight_layout()
     plt.show()
 
+# Podsumowanie
+print("\n" + "="*50)
+print("PODSUMOWANIE ANALIZY")
+print("="*50)
+print("Analiza EDA zakończona pomyślnie!")
+print(f"Przeanalizowano {len(df)} piw")
+print(f"Liczba cech: {len(df.columns)}")
+
+if len(kolumny_numeryczne) > 0:
+    print("Znalezione cechy numeryczne:", list(kolumny_numeryczne))
+if len(kolumny_tekstowe) > 0:
+    print("Znalezione cechy kategoryczne:", list(kolumny_tekstowe))
+
+# najlepiej ocenione
+if 'ocena' in df.columns and 'nazwa' in df.columns:
+    print("\n3 najwyżej oceniane piwa")
+    najlepsze = df.nlargest(3, 'ocena')[['nazwa', 'ocena']]
+    print(najlepsze)
+
+# najzwyższa zawartosć alko
+if 'alkohol' in df.columns and 'nazwa' in df.columns:
+    print("\n3 piwa z najwyższą zawartością alkoholu:")
+    mocne = df.nlargest(3, 'alkohol')[['nazwa', 'alkohol']]
+    print(mocne)
+
+print("\n" + "="*50)
