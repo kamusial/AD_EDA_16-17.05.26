@@ -46,8 +46,36 @@ else:
     print('Brak kolumn numerycznych w danych')
 
 # 6. Statystyki kategorycze
+print("\n" + "="*50)
+print("STATYSTYKI KATEGORYCZNE")
+print("="*50)
+
+kolumny_tekstowe = df.select_dtypes(include='object').columns
+if len (kolumny_tekstowe) > 0:
+    for kolumna in kolumny_tekstowe:
+        print(f'\nKolumna: {kolumna}')
+        print(f'Liczba unikalnych wartości: {df[kolumna].unique()}')
+        print('3 najczęstrzych wartości')
+        print(df[kolumna].value_counts().head(3))
+else:
+    print('Brak kolumn kategorycznych w danych')
 
 # 7. Brakujące wartości
+print("\n" + "="*50)
+print("BRAKUJĄCE WARTOŚCI")
+print("="*50)
+
+brakujace = df.isnull().sum()
+if brakujace.sum() > 0:
+    print('Kolumny z brakujacymi wartosciami:')
+    for kolumna in df.columns:
+        if df[kolumna].isnull().sum() > 0:
+            braki_liczbowo = df[kolumna].isnull().sum()
+            braki_procentowo = braki_liczbowo / len(df) * 100
+            print(f'    {kolumna}: {braki_liczbowo} ({braki_procentowo:.1f})%')
+
+
+
 
 # 8. Wizualizacje
 print("\n" + "=" * 50)
@@ -55,7 +83,7 @@ print("TWORZENIE WYKRESÓW")
 print("=" * 50)
 
 # wykres 1, rozklad zawartości alkoholu
-if 'alkohol' in df.columns:
+if 'alkohol' in df.columns and False:
     plt.figure(figsize=(10, 6))
     plt.subplot(1, 2, 1) # jeden wiersz, 2 kolumny, pierwszy z lewej
     df['alkohol'].hist(bins=10, color='lightblue', edgecolor='black')
@@ -69,7 +97,7 @@ if 'alkohol' in df.columns:
     plt.show()
 
 # wykres 2, rozklad ocen
-if 'ocena' in df.columns:
+if 'ocena' in df.columns and False:
     plt.figure(figsize=(8, 5))
     df['ocena'].hist(bins=8, color='lightgreen', edgecolor='black', alpha=0.7)
     plt.title('Rozkład ocen piw')
@@ -79,7 +107,7 @@ if 'ocena' in df.columns:
     plt.show()
 
 # Wykres 3: Zależność między alkoholem a oceną
-if 'alkohol' in df.columns and 'ocena' in df.columns:
+if 'alkohol' in df.columns and 'ocena' in df.columns and False:
     plt.figure(figsize=(8, 6))
     plt.scatter(df['alkohol'], df['ocena'], alpha=0.6, s=60, color='purple')
     plt.title('Zależność między zawartością alkoholu a oceną')
@@ -93,7 +121,7 @@ if 'alkohol' in df.columns and 'ocena' in df.columns:
     plt.show()
 
 # Wykres 4: Popularność stylów piw
-if 'styl' in df.columns:
+if 'styl' in df.columns and False:
     plt.figure(figsize=(10, 6))
     df['styl'].value_counts().plot(kind='bar', color='orange', edgecolor='black')
     plt.title('Popularność stylów piw')
@@ -105,7 +133,7 @@ if 'styl' in df.columns:
     plt.show()
 
 # Wykres 5: Macierz korelacji (jeśli są przynajmniej 2 kolumny numeryczne)
-if len(kolumny_numeryczne) >= 2:
+if len(kolumny_numeryczne) >= 2 and False:
     plt.figure(figsize=(8, 6))
     macierz_korelacji = df[kolumny_numeryczne].corr()
     sns.heatmap(macierz_korelacji, annot=True, cmap='coolwarm')
