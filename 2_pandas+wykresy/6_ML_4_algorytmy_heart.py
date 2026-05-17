@@ -8,12 +8,12 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 
-# X, y = make_moons(n_samples=500, noise=0.2)
-X, y = make_circles(n_samples=500, factor=0.5, noise=0.2)
-# print(X)
-# print(y)
-plt.scatter(X[:, 0], X[:, 1], c=y)
-plt.show()
+df = pd.read_csv('..\\data\\heart.csv', comment='#')
+print(df)
+print(df.describe().T.round().to_string())
+
+X = df.iloc[: , :-1]
+y = df.target
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2)
 
