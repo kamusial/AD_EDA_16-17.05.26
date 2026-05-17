@@ -21,3 +21,35 @@ except Exception as e:
         'styl': ['IPA', 'IPA', 'Lager', 'Ciemne', 'Lager', np.nan, 'Ciemne', 'Jasne', 'Ciemne']
     }
     df = pd.DataFrame(data)
+
+# 2. Podstawowe info
+print('\n' + '='*50)
+print(f'Wymiary danych: {df.shape}')
+print(f'Liczba wierszy: {df.shape[0]}')
+print(f'Liczba kolumn: {df.shape[1]}')
+
+# 3. Podgląd danych
+print('Pierwsze 5 piw')
+print(df.head())
+print('Ostatnie 3 piwa')
+print(df.tail(3))
+
+# 4. Typy danych
+print(f'\n{df.info()}')
+
+# 5. Statystyki numeryczne
+kolumny_numeryczne = df.select_dtypes(include='number').columns   # nazwy kolumn numerycznych
+if len(kolumny_numeryczne) > 0:
+    print('Statystyki dla cech numerycznych:')
+    print(df[kolumny_numeryczne].describe().T.to_string())
+else:
+    print('Brak kolumn numerycznych w danych')
+
+# 6. Statystyki kategorycze
+
+# 7. Brakujące wartości
+
+# 8. Wizualizacje
+print("\n" + "=" * 50)
+print("TWORZENIE WYKRESÓW")
+print("=" * 50)
