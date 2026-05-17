@@ -13,7 +13,7 @@ model.add(Dense(2, activation='relu'))
 model.add(Dense(1, activation='linear'))
 model.compile(optimizer='rmsprop', loss='mse')
 
-result = model.fit(df.F, df.C, epochs=100)
+result = model.fit(df.F, df.C, epochs=300)
 
 C_pred = model.predict(df.F)
 
