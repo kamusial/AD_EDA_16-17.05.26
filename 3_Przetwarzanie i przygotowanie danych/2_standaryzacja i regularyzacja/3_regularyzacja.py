@@ -106,3 +106,29 @@ plt.ylabel("MSE")
 plt.xticks(rotation=0)
 plt.grid(True)
 plt.show()
+
+# 7. Wykres współczynników modeli
+# Pobieramy nazwy cech wielomianowych: x, x^2, x^3, ...
+feature_names = models["Bez regularyzacji"].named_steps["poly"].get_feature_names_out(["x"])
+
+coef_df = pd.DataFrame({
+    "cecha": feature_names,
+    "Bez regularyzacji": models["Bez regularyzacji"].named_steps["model"].coef_,
+    "Ridge L2": models["Ridge L2"].named_steps["model"].coef_,
+    "Lasso L1": models["Lasso L1"].named_steps["model"].coef_
+})
+
+print("\n--- WSPÓŁCZYNNIKI MODELI ---")
+print(coef_df)
+
+coef_df.set_index("cecha").plot(
+    kind="bar",
+    figsize=(12, 5)
+)
+
+plt.title("Współczynniki modeli")
+plt.xlabel("Cecha")
+plt.ylabel("Wartość współczynnika")
+plt.xticks(rotation=45)
+plt.grid(True)
+plt.show()
