@@ -42,7 +42,7 @@ models = {
     "Ridge L2": Pipeline([
         ("poly", PolynomialFeatures(degree=degree, include_bias=False)),
         ("scaler", StandardScaler()),
-        ("model", Ridge(alpha=1.0))
+        ("model", Ridge(alpha=0.01))
     ]),
 
     "Lasso L1": Pipeline([
@@ -90,5 +90,19 @@ plt.title("Porównanie modeli: bez regularyzacji vs z regularyzacją")
 plt.xlabel("X")
 plt.ylabel("y")
 plt.legend()
+plt.grid(True)
+plt.show()
+
+
+# 6. Wykres błędów MSE
+results_df.set_index("model")[["MSE_train", "MSE_test"]].plot(
+    kind="bar",
+    figsize=(9, 5)
+)
+
+plt.title("Błąd modelu na danych treningowych i testowych")
+plt.xlabel("Model")
+plt.ylabel("MSE")
+plt.xticks(rotation=0)
 plt.grid(True)
 plt.show()
