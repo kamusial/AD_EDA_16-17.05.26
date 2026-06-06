@@ -16,7 +16,7 @@ np.random.seed(42)
 X = np.linspace(0, 10, 35).reshape(-1, 1)
 
 # Tworzymy zmienną y z lekkim zakrzywieniem i szumem
-y = 2 + 1.5 * X.ravel() - 0.15 * X.ravel() ** 2 + np.random.normal(0, 1.2, size=35)
+y = 2 + 1.5 * X.ravel() - 0.15 * X.ravel() ** 2 + np.random.normal(0, 0.2, size=35)
 # plt.scatter(X, y)
 # plt.show()
 
@@ -42,13 +42,13 @@ models = {
     "Ridge L2": Pipeline([
         ("poly", PolynomialFeatures(degree=degree, include_bias=False)),
         ("scaler", StandardScaler()),
-        ("model", Ridge(alpha=0.01))
+        ("model", Ridge(alpha=0.1))  # 0.01 - 100
     ]),
 
     "Lasso L1": Pipeline([
         ("poly", PolynomialFeatures(degree=degree, include_bias=False)),
         ("scaler", StandardScaler()),
-        ("model", Lasso(alpha=0.05, max_iter=20000))
+        ("model", Lasso(alpha=0.1, max_iter=20000))
     ])
 }
 results = []
