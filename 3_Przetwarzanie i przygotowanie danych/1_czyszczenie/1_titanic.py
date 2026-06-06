@@ -47,3 +47,46 @@ for col in ["embarked", "embark_town"]:
 
 # 9. Dodajemy zmienną pochodną z NumPy.
 clean["is_child"] = np.where(clean["age"] < 18, 1, 0)
+
+# 10. Tworzymy przedziały wieku.
+clean["age_group"] = pd.cut(
+    clean["age"],
+    bins=[0, 12, 18, 35, 60, np.inf],
+    labels=["dziecko", "nastolatek", "mlody_dorosly", "dorosly", "senior"],
+    right=False
+)
+
+
+# 11. Zmieniamy wybrane kolumny tekstowe/logiczne na typ category.
+#     Typ category oszczędza pamięć i jasno pokazuje,
+#     że kolumna ma ograniczony zestaw wartości.
+categorical_columns = [
+    "sex", "embarked", "embark_town", "class",
+    "who", "adult_male", "alive", "alone", "age_group"
+]
+for col in categorical_columns:
+    clean[col] = clean[col].astype("category")
+
+print(clean.head().to_string())
+# print(clean["sex"].dtype)
+# # print(clean["sex"].cat.categories)
+
+# 12. Sprawdzamy duplikaty.
+duplicates_before = clean.duplicated().sum()
+print(f'Liczba duplikatów przed czyszczeniem: {duplicates_before}')
+clean = clean.drop_duplicates()
+
+# 13. Kontrola po czyszczeniu.
+print(f'Braki po czyszczeniu\n: {clean.isna().sum().sort_values(ascending=False)}')
+
+print("\n--- TYPY DANYCH PO CZYSZCZENIU ---")
+print(clean.dtypes)
+
+print("\n--- PRZYKŁADOWE DANE PO CZYSZCZENIU ---")
+print(clean.head().to_string())
+
+# 14. Zapisujemy oczyszczony plik.
+clean.to_csv("titanic_clean.csv", index=False)
+print("\nZapisano plik: titanic_clean.csv")
+
+
