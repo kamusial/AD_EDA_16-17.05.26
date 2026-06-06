@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-df = pd.read_csv('..\\data\\diabetes.csv')
+df = pd.read_csv('../data/diabetes.csv')
 print(f'Kształt danych: {df.shape}')
 print(df.describe().T.round(2).to_string())
 

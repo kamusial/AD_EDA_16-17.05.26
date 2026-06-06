@@ -8,7 +8,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 
-df = pd.read_csv('..\\data\\heart.csv', comment='#')
+df = pd.read_csv('../data/heart.csv', comment='#')
 print(df)
 print(df.describe().T.round().to_string())
 

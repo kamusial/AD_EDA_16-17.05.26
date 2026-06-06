@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 
-df = pd.read_csv('..\\data\\f-c.csv', usecols=[1, 2])
+df = pd.read_csv('../data/f-c.csv', usecols=[1, 2])
 print(df)
 
 model = Sequential()
