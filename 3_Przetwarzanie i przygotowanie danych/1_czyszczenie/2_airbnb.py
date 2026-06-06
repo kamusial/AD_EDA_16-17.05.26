@@ -68,6 +68,13 @@ for col in text_columns:
         .str.replace(r"\s+", " ", regex=True)
     )
 
+# 11. Kontrola współrzędnych.
+bad_geo = ~clean["latitude"].between(40.45, 40.95) | ~clean["longitude"].between(-74.30, -73.65)
+print("\n--- LICZBA REKORDÓW Z PODEJRZANYMI WSPÓŁRZĘDNYMI ---")
+print(bad_geo.sum())
+clean = clean.loc[~bad_geo].copy()
+
+# IQR, w pliku nr 3
 
 
 
