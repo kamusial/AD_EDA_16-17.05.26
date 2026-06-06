@@ -1,9 +1,11 @@
-import pandas as pd
-import numpy as np
+class Auto:
+    def __init__(self):
+        self.kolor = 'red'
+        self.ilosc_paliwa = 10
+        self.kondycja = 5
+        self.tryb_ekonomiczny = False
+        self.spalanie_na_100 = 14
+        self.mandaty = []
+        self.komentarze = []
+        self.rocznik = 2021
 
-my_file = pd.DataFrame({
-    "imie": ['kamil', 'marek'],
-    "wiek": [23, 76]
-})
-
-print(my_file)
