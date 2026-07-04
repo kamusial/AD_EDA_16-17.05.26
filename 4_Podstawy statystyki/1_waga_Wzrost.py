@@ -7,6 +7,7 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+from scipy import stats
 
 df = pd.read_csv("..\\2_EDA\\data\\weight-height.csv", sep=";")
 print(df.head())
@@ -45,5 +46,27 @@ def przedzial_ufnosci_95(dane):
     srednia = dane.mean()
     odchylenie = dane.std()
     n = len(dane)
-
     blad_standardowy = odchylenie / (n ** 0.5)
+    t_krytyczne = stats.t.ppf(0.975, df=n - 1)
+    dolna_granica = srednia - t_krytyczne * blad_standardowy
+    gorna_granica = srednia + t_krytyczne * blad_standardowy
+    return dolna_granica, gorna_granica
+
+ci_kobiety = przedzial_ufnosci_95(wzrost_kobiety)
+ci_mezczyzni = przedzial_ufnosci_95(wzrost_mezczyzni)
+
+print("\n95% przedział ufności dla średniego wzrostu kobiet:")
+print(ci_kobiety)
+
+print("\n95% przedział ufności dla średniego wzrostu mężczyzn:")
+print(ci_mezczyzni)
+
+# Histogram pokazuje kształt rozkładu:
+# - czy rozkład jest symetryczny,
+# - gdzie znajduje się najwięcej obserwacji,
+
+# Na podstawie wyników odpowiedz:
+# 1. Która grupa ma większy średni wzrost?
+# 2. Która grupa ma większe odchylenie standardowe?
+# 3. Czy przedziały ufności dla kobiet i mężczyzn nachodzą na siebie?
+# 4. Co oznacza 95% przedział ufności w tym przykładzie?
