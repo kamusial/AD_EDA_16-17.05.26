@@ -64,9 +64,20 @@ print(ci_mezczyzni)
 # Histogram pokazuje kształt rozkładu:
 # - czy rozkład jest symetryczny,
 # - gdzie znajduje się najwięcej obserwacji,
+plt.hist(wzrost_kobiety, bins=30, alpha=0.5, label="Kobiety")
+plt.hist(wzrost_mezczyzni, bins=30, alpha=0.5, label="Mężczyźni")
+plt.title("Rozkład wzrostu kobiet i mężczyzn")
+plt.xlabel("Wzrost [cm]")
+plt.ylabel("Liczba osób")
+plt.legend()
+plt.show()
 
 # Na podstawie wyników odpowiedz:
 # 1. Która grupa ma większy średni wzrost?
 # 2. Która grupa ma większe odchylenie standardowe?
 # 3. Czy przedziały ufności dla kobiet i mężczyzn nachodzą na siebie?
 # 4. Co oznacza 95% przedział ufności w tym przykładzie?
+
+# Trening:
+# Policz analogiczny 95% przedział ufności dla średniej wagi kobiet i mężczyzn.
+# Sprawdź, jak zmieni się szerokość przedziału ufności, jeżeli użyjesz tylko losowych 100 obserwacji z każdej grupy. Wyjaśnij, dlaczego przedział zrobił się szerszy albo węższy.
