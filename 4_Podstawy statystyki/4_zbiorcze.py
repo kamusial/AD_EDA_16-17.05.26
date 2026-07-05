@@ -99,3 +99,20 @@ print("\n" + "=" * 80)
 print("4. STATYSTYKI OPISOWE")
 print("=" * 80)
 
+x = df["response_time_hours"]
+print("Opis zmiennej response_time_hours, czyli czasu obsługi w godzinach:")
+print(x.describe(percentiles=[0.01, 0.05, 0.25, 0.5, 0.75, 0.90, 0.95, 0.99]).round(2).to_string())
+print("\nLiczba zgłoszeń według dzielnicy:")
+print(df["borough"].value_counts().to_string())
+
+n = x.count()
+mean = x.mean()
+std = x.std(ddof=1)
+standard_error = std / np.sqrt(n)
+t_critical = stats.t.ppf(0.975, df=n - 1)
+ci_low = mean - t_critical * standard_error
+ci_high = mean + t_critical * standard_error
+
+print("\nŚrednia i 95% przedział ufności:")
+print(f"średnia = {mean:.2f} godzin")
+print(f"95% CI = ({ci_low:.2f}, {ci_high:.2f}) godzin")
