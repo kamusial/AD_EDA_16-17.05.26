@@ -233,4 +233,3 @@ if test_t.pvalue < 0.05:
 else:
     print("Wniosek: nie mamy podstaw do odrzucenia H0. Nie widać istotnej różnicy średnich.")
 
-# znacznik
