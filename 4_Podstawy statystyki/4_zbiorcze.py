@@ -45,3 +45,14 @@ params = {
 }
 
 url = "https://data.cityofnewyork.us/resource/erm2-nwe9.csv?" + urlencode(params)
+
+if CACHE_FILE.exists():
+    print(f"Wczytuję dane z cache: {CACHE_FILE}")
+    df = pd.read_csv(CACHE_FILE)
+else:
+    print("Pobieram dane z publicznego API NYC Open Data...")
+    print(f"Zakres dat: {START_DATE} — {END_DATE}")
+    print(f"Limit wierszy: {ROW_LIMIT}")
+    df = pd.read_csv(url)
+    df.to_csv(CACHE_FILE, index=False)
+    print(f"Zapisano cache: {CACHE_FILE}")
