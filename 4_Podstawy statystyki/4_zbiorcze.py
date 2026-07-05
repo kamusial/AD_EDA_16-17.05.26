@@ -232,3 +232,5 @@ if test_t.pvalue < 0.05:
     print("Wniosek: odrzucamy H0. Średnie czasy obsługi różnią się statystycznie istotnie.")
 else:
     print("Wniosek: nie mamy podstaw do odrzucenia H0. Nie widać istotnej różnicy średnich.")
+
+# znacznik
