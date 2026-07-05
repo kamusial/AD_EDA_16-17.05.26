@@ -69,6 +69,8 @@ print("\n" + "=" * 80)
 print("3. CZYSZCZENIE DANYCH")
 print("=" * 80)
 
+before = len(df)
+
 df["created_date"] = pd.to_datetime(df["created_date"], errors='coerce')
 df["closed_date"] = pd.to_datetime(df["closed_date"], errors="coerce")
 
@@ -82,4 +84,18 @@ df = df[df["response_time_hours"] <= 365 * 24]
 df = df[~df["borough"].isin(["UNSPECIFIED", "0", "NAN", "<NA>"])]
 print(df.head().to_string())
 
+after = len(df)
+
+print(f"Liczba wierszy przed czyszczeniem: {before:,}".replace(",", " "))
+print(f"Liczba wierszy po czyszczeniu:    {after:,}".replace(",", " "))
+print(f"Usunięto:                         {before - after:,}".replace(",", " "))
+
+print("\nProcent braków danych po czyszczeniu:")
+print((df.isna().mean() * 100).round(2).sort_values(ascending=False).to_string())
+
+# 4. STATYSTYKI OPISOWE
+
+print("\n" + "=" * 80)
+print("4. STATYSTYKI OPISOWE")
+print("=" * 80)
 
